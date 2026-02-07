@@ -3,7 +3,7 @@
     <div class="max-w-4xl text-center">
       <h2 class="text-indigo-600 font-medium tracking-widest uppercase mb-4">Hello, I am</h2>
       <h1 class="text-5xl md:text-7xl font-bold text-slate-900 mb-6">
-        Alex J. Developer
+        Elgaa
       </h1>
       <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
         Membangun pengalaman digital yang fungsional dan estetis. Spesialis dalam pengembangan 
