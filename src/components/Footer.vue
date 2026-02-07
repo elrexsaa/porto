@@ -5,7 +5,7 @@
         © 2026 Elgaa Dev. All rights reserved.
       </div>
       <div class="text-slate-400 text-xs tracking-widest uppercase">
-        Built with Vue 3 & Tailwind
+        Dibuat Oleh Elga Kesayangan Nikita Lope Lope
       </div>
     </div>
   </footer>
