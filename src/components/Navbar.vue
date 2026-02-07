@@ -13,9 +13,7 @@ const navLinks = [
 <template>
   <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div 
-  @click="window.location.reload()" 
-  class="text-xl font-bold tracking-tighter text-indigo-600 cursor-pointer hover:opacity-80 transition"> PORTFOLIO. </div>
+      <div @click="window.location.reload()" class="text-xl font-bold tracking-tighter text-indigo-600 cursor-pointer hover:opacity-80 transition"> Elgaa. </div>
       
       <div class="hidden md:flex gap-8">
         <a v-for="link in navLinks" :key="link.name" :href="link.href" 
