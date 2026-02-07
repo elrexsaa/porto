@@ -6,8 +6,7 @@
         Elgaa
       </h1>
       <p class="text-lg md:text-xl text-slate-600 mb-8 max-w-2xl mx-auto leading-relaxed">
-        Membangun pengalaman digital yang fungsional dan estetis. Spesialis dalam pengembangan 
-        web modern dengan fokus pada performa dan user experience.
+        Suka uang, duit, money, dll.
       </p>
       <div class="flex gap-4 justify-center">
         <a href="#projects" class="bg-slate-900 text-white px-8 py-3 rounded-full hover:bg-indigo-600 transition shadow-lg">Lihat Karya</a>
