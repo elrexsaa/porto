@@ -1,6 +1,16 @@
 <script setup>
 import { ref } from 'vue';
+
 const isMenuOpen = ref(false);
+const isReloading = ref(false); // State untuk animasi
+
+const handleReload = () => {
+  isReloading.value = true; // Picu animasi fade-out
+  setTimeout(() => {
+    window.location.reload();
+  }, 300); // Tunggu 300ms agar animasi selesai, baru reload
+};
+
 const navLinks = [
   { name: 'Home', href: '#home' },
   { name: 'About', href: '#about' },
@@ -11,9 +21,17 @@ const navLinks = [
 </script>
 
 <template>
-  <nav class="fixed w-full z-50 bg-white/80 backdrop-blur-md border-b border-slate-100">
+  <nav 
+    :class="['fixed w-full z-50 transition-opacity duration-300', isReloading ? 'opacity-0' : 'opacity-100']"
+    class="bg-white/80 backdrop-blur-md border-b border-slate-100"
+  >
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <div @click="window.location.reload()" class="text-xl font-bold tracking-tighter text-indigo-600 cursor-pointer hover:opacity-80 transition"> Elgaa. </div>
+      <div 
+        @click="handleReload"
+        class="text-xl font-bold tracking-tighter text-indigo-600 cursor-pointer hover:scale-105 active:scale-95 transition-transform duration-200"
+      >
+        Elgaaa
+      </div>
       
       <div class="hidden md:flex gap-8">
         <a v-for="link in navLinks" :key="link.name" :href="link.href" 
