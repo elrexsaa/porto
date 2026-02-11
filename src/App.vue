@@ -8,8 +8,12 @@ import Skills from '@/sections/Skills.vue';
 import Projects from '@/sections/Projects.vue';
 import Contact from '@/sections/Contact.vue';
 import Footer from '@/components/Footer.vue';
+import AIAssistant from '@/components/AIAssistant.vue';
 
-// Fungsi untuk menghitung progress scroll (Reading Progress Bar)
+/**
+ * Fungsi untuk mengupdate lebar progress bar di atas layar
+ * berdasarkan posisi scroll pengguna.
+ */
 const handleScroll = () => {
   const progressBar = document.getElementById('scroll-progress');
   if (progressBar) {
@@ -21,15 +25,22 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  // Inisialisasi efek muncul saat scroll
+  // Inisialisasi efek muncul (reveal) untuk elemen dengan class .reveal
   observeReveal();
   
-  // Tambahkan listener untuk progress bar
+  // Menambahkan event listener untuk fitur Reading Progress Bar
   window.addEventListener('scroll', handleScroll);
+
+  // Inisialisasi tema saat halaman pertama kali dimuat
+  if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
 });
 
 onUnmounted(() => {
-  // Bersihkan listener saat komponen dilepas agar tidak boros RAM
+  // Membersihkan event listener saat komponen dihancurkan
   window.removeEventListener('scroll', handleScroll);
 });
 </script>
@@ -51,16 +62,21 @@ onUnmounted(() => {
       <Contact class="reveal" />
     </main>
 
+    <AIAssistant />
+
     <Footer />
     
   </div>
 </template>
 
 <style>
-/* Pastikan CSS global seperti .reveal sudah ada di style.css.
-  Kamu juga bisa menambahkan transisi smooth scroll di sini jika belum ada di CSS global.
-*/
+/* Smooth scrolling untuk navigasi internal link */
 html {
   scroll-behavior: smooth;
+}
+
+/* Memastikan transisi Dark Mode terasa halus di seluruh elemen */
+* {
+  @apply transition-colors duration-300;
 }
 </style>
