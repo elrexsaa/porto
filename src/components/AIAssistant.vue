@@ -5,7 +5,7 @@ const isOpen = ref(false);
 const message = ref('');
 const isLoading = ref(false);
 const chatHistory = ref([
-  { role: 'assistant', text: 'halo bjir! gue asisten ai elgaa paling gacor. mau nanya apa lo njir?' }
+  { role: 'assistant', text: 'halo! gue asisten ai elgaa. mau nanya apa lo?' }
 ]);
 
 // --- MASUKKAN API KEY GROQ LO DI SINI ---
