@@ -3,6 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
+  // Base path sesuai nama repo kamu
   base: '/porto/', 
   
   plugins: [vue()],
@@ -11,24 +12,5 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
-  },
-
-  build: {
-    // Tambahan: Mengatur rollup secara eksplisit
-    rollupOptions: {
-      output: {
-        manualChunks: {
-          'google-ai': ['@google/generative-ai'],
-        },
-      },
-    },
-    commonjsOptions: {
-      include: [/@google\/generative-ai/, /node_modules/],
-      transformMixedEsModules: true, 
-    },
-  },
-
-  optimizeDeps: {
-    include: ['@google/generative-ai'],
-  },
+  }
 })
