@@ -39,7 +39,7 @@ onMounted(() => {
 
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
       <div @click="handleReload" class="text-xl font-bold tracking-tighter text-indigo-600 dark:text-indigo-400 cursor-pointer hover:scale-105 transition-transform">
-        PORTFOLIO.
+        Elgaaa
       </div>
       
       <div class="flex items-center gap-6">
