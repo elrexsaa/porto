@@ -3,7 +3,7 @@ import vue from '@vitejs/plugin-vue'
 import { fileURLToPath, URL } from 'node:url'
 
 export default defineConfig({
-  // Base path sesuai nama repository GitHub kamu
+  // Base path sesuai nama repo GitHub lo
   base: '/porto/', 
   
   plugins: [vue()],
@@ -14,9 +14,9 @@ export default defineConfig({
     }
   },
 
-  // Build config dibuat simpel karena kita tidak pakai library Google AI lagi
   build: {
     outDir: 'dist',
-    minify: 'terser', // Opsional: biar file hasil build lebih kecil & kencang
+    // Hapus 'minify: terser' biar gak error 'terser not found' lagi
+    // Secara default Vite udah pake esbuild yang lebih GG dan gacor
   }
 })
