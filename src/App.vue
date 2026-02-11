@@ -1,16 +1,26 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, onUnmounted } from 'vue'; // Tambahkan onUnmounted
 import { observeReveal } from '@/utils/reveal.js';
 import Navbar from '@/components/Navbar.vue';
-import Hero from '@/sections/Hero.vue';
-import About from '@/sections/About.vue';
-import Skills from '@/sections/Skills.vue';
-import Projects from '@/sections/Projects.vue';
-import Contact from '@/sections/Contact.vue';
-import Footer from '@/components/Footer.vue';
+// ... import section lainnya
+
+const handleScroll = () => {
+  const progressBar = document.getElementById('scroll-progress');
+  if (progressBar) {
+    const windowScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (windowScroll / height) * 100;
+    progressBar.style.width = scrolled + "%";
+  }
+};
 
 onMounted(() => {
   observeReveal();
+  window.addEventListener('scroll', handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
 });
 </script>
 
