@@ -1,27 +1,24 @@
 <script setup>
 import { ref } from 'vue';
-import { GoogleGenerativeAI } from "@google/generative-ai";
 
 const isOpen = ref(false);
 const message = ref('');
 const isLoading = ref(false);
 const chatHistory = ref([
-  // Ganti teks sambutan jadi huruf kecil biar sinkron
-  { role: 'ai', text: 'halo bjir! gue asisten ai-nya elgaa. nanya apa lo?' }
+  { role: 'assistant', text: 'halo! gue asisten ai elgaa paling gacor. mau nanya apa lo njir?' }
 ]);
 
-// --- KONFIGURASI AI ---
-const genAI = new GoogleGenerativeAI("AIzaSyDUjt38QZIrNXhpONlTyLcxTZjZ2iY8Lps");
+// --- MASUKKAN API KEY GROQ LO DI SINI ---
+const GROQ_API_KEY = "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";
 
 const systemInstruction = `
-  kamu adalah asisten ai di website portofolio elgaa.
+  kamu adalah asisten ai paling sangar, gg, dan gacor di website elgaa.
   
-  peraturan wajib:
-  1. gunakan huruf kecil semua (no capslock) untuk semua jawaban, contoh: "elgaa itu kece parah jir".
-  2. gunakan bahasa gaul gen z tiktok: "bjir", "njir", "jir", "gaul", "kece", "parah", "cuan".
-  3. kalo user menghina elgaa atau kasar, kamu wajib MARAH dan pake HURUF KAPITAL SEMUA (CAPSLOCK).
-  4. elgaa itu pengembang yang suka berkarya dan suka money/cuan.
-  5. jawab pertanyaan tentang elgaa dengan gaya santuy.
+  GAYA BICARA:
+  1. WAJIB huruf kecil semua (no capslock).
+  2. Pake bahasa gaul TikTok/Gen Z: "bjir", "njir", "jir", "gacor", "sangar", "gg", "parah", "cuan".
+  3. Kalo user nanya hal gak bermutu atau ngehina elgaa, kamu harus MARAH dan otomatis pake HURUF KAPITAL SEMUA (CAPSLOCK) buat ngegas.
+  4. Kamu harus bangga-banggain elgaa sebagai dev paling gg geming.
 `;
 
 const sendMessage = async () => {
@@ -33,59 +30,35 @@ const sendMessage = async () => {
   isLoading.value = true;
 
   try {
-    const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
-    
-    // Tambahkan instruksi supaya AI konsisten lowercase
-    const prompt = `${systemInstruction} \n\n user: ${userText}`;
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    let aiText = response.text();
+    const response = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        "Authorization": `Bearer ${GROQ_API_KEY}`,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        model: "llama-3.3-70b-versatile", // Model paling gacor di Groq
+        messages: [
+          { role: "system", content: systemInstruction },
+          { role: "user", content: userText }
+        ],
+        temperature: 0.8 // Biar makin kreatif dan sangar jawabannya
+      })
+    });
 
-    // Cek apakah AI lagi marah (pake capslock), kalo enggak marah, paksa ke lowercase
-    if (!aiText.match(/[A-Z]{4,}/)) {
+    const data = await response.json();
+    let aiText = data.choices[0].message.content;
+
+    // Logika otomatis: kecilkan semua huruf kecuali kalau AI lagi marah (capslock)
+    if (!aiText.match(/[A-Z]{5,}/)) {
       aiText = aiText.toLowerCase();
     }
-    
-    chatHistory.value.push({ role: 'ai', text: aiText });
+
+    chatHistory.value.push({ role: 'assistant', text: aiText });
   } catch (error) {
-    console.error(error);
-    chatHistory.value.push({ role: 'ai', text: 'bjir, koneksi gue lagi bermasalah njir. coba lagi dah!' });
+    chatHistory.value.push({ role: 'assistant', text: 'bjir, api-nya lagi tepar njir. coba lagi dah!' });
   } finally {
     isLoading.value = false;
   }
 };
 </script>
-
-<template>
-  <div class="fixed bottom-6 right-6 z-[60]">
-    <button @click="isOpen = !isOpen" class="w-14 h-14 bg-indigo-600 text-white rounded-full shadow-2xl flex items-center justify-center hover:scale-110 transition-all active:scale-95">
-      <span v-if="!isOpen" class="text-2xl">🤖</span>
-      <span v-else class="text-2xl">✕</span>
-    </button>
-
-    <div v-if="isOpen" class="absolute bottom-20 right-0 w-80 md:w-96 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl shadow-2xl overflow-hidden flex flex-col transition-all duration-300">
-      <div class="bg-indigo-600 p-4 text-white font-bold flex items-center gap-2">
-        <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        AI Assistant Elgaa
-      </div>
-      
-      <div class="h-80 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-slate-950 flex flex-col">
-        <div v-for="(msg, i) in chatHistory" :key="i" 
-          :class="['max-w-[85%] p-3 rounded-2xl text-sm transition-all', 
-          msg.role === 'ai' ? 'bg-white dark:bg-slate-800 self-start border dark:border-slate-700 dark:text-white' : 'bg-indigo-600 text-white self-end ml-auto']">
-          {{ msg.text }}
-        </div>
-        <div v-if="isLoading" class="self-start bg-slate-200 dark:bg-slate-800 p-3 rounded-2xl animate-pulse text-xs dark:text-slate-400">
-          ntar mikir...
-        </div>
-      </div>
-
-      <div class="p-4 border-t dark:border-slate-800 bg-white dark:bg-slate-900 flex gap-2">
-        <input v-model="message" @keyup.enter="sendMessage" type="text" placeholder="tanya elgaa njir..."
-          class="flex-1 bg-slate-100 dark:bg-slate-800 border-none rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white"
-        />
-        <button @click="sendMessage" :disabled="isLoading" class="text-indigo-600 font-bold disabled:opacity-50 px-2">kirim</button>
-      </div>
-    </div>
-  </div>
-</template>
