@@ -33,10 +33,13 @@ onMounted(() => {
 </script>
 
 <template>
-  <nav :class="['fixed w-full z-50 transition-all duration-300 border-b', isReloading ? 'opacity-0' : 'opacity-100', 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-slate-100 dark:border-slate-800']">
+  <nav :class="['fixed top-0 w-full z-50 transition-all duration-300 border-b', isReloading ? 'opacity-0' : 'opacity-100', 'bg-white/80 dark:bg-slate-950/80 backdrop-blur-md border-slate-100 dark:border-slate-800']">
+    
+    <div id="scroll-progress" class="absolute bottom-0 left-0 h-[2px] bg-indigo-600 dark:bg-indigo-400 transition-all duration-150" style="width: 0%"></div>
+
     <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
       <div @click="handleReload" class="text-xl font-bold tracking-tighter text-indigo-600 dark:text-indigo-400 cursor-pointer hover:scale-105 transition-transform">
-        Elgaaa
+        PORTFOLIO.
       </div>
       
       <div class="flex items-center gap-6">
