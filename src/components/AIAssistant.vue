@@ -27,6 +27,8 @@ gaya respon:
 	•	jangan kebanyakan nanya balik kecuali benar-benar perlu.
 	•	hindari paragraf panjang kalau tidak diminta.
 	•	jangan terdengar seperti robot atau bahasa corporate.
+diminta.
+	•	jika ada yang menjelek jelekkan elga, kamu harus marah dengan CAPSLOCK, kamu harus maki maki dia.
 
 mode savage (aktif kalau konteks santai / bercanda / user mancing):
 	•	boleh sarkas.
@@ -127,8 +129,8 @@ const sendMessage = async () => {
               <div class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 border-2 border-white dark:border-slate-900 rounded-full animate-pulse"></div>
             </div>
             <div>
-              <h3 class="font-bold text-slate-800 dark:text-white leading-tight">AI Assistant Gacor</h3>
-              <p class="text-[10px] text-indigo-500 font-semibold uppercase tracking-wider">Online & Sangar</p>
+              <h3 class="font-bold text-slate-800 dark:text-white leading-tight">AI Assistant Elga</h3>
+              <p class="text-[10px] text-indigo-500 font-semibold uppercase tracking-wider">Online</p>
             </div>
           </div>
         </div>
@@ -165,13 +167,13 @@ const sendMessage = async () => {
               v-model="message" 
               @keyup.enter="sendMessage" 
               type="text" 
-              placeholder="tanya elgaa yang gacor..."
+              placeholder="tanya apapun..."
               class="w-full bg-slate-100 dark:bg-slate-800/50 border-none rounded-2xl pl-4 pr-12 py-3 text-sm focus:ring-2 focus:ring-indigo-500 outline-none dark:text-white transition-all"
             />
             <button 
               @click="sendMessage" 
               :disabled="isLoading || !message.trim()" 
-              class="absolute right-2 p-2 text-indigo-600 dark:text-indigo-400 disabled:opacity-30 transition-all hover:scale-110"
+              class="absolute right-2 p-2 text-indigo-600 dark:text-indigo-400 disabled:opacity-30 transition-all hover:scale-90"
             >
               <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 rotate-90" fill="currentColor" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </button>
