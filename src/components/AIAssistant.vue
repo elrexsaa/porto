@@ -8,8 +8,7 @@ const chatHistory = ref([
   { role: 'assistant', text: 'halo! gue asisten ai elgaa. mau nanya apa lo?' }
 ]);
 
-// --- MASUKKAN API KEY GROQ LO DI SINI ---
-const GROQ_API_KEY = "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";
+const GROQ_API_KEY = "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";
 
 const systemInstruction = `
   kamu adalah asisten ai pribadi milik elga (lahir 2007), cowo ganteng, suka ngoding ala ai. kamu punya vibe gen z tiktok/jaksel, santai, gaul, kadang nyelipin bahasa inggris yang natural dan ga maksa.
